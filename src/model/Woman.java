@@ -1,9 +1,9 @@
-package practise;
+package model;
 
 public class Woman extends Person {
 	protected String sex = "female";
 
-	Woman(String firstName, String lastName, String surname, int age, String nation) {
+	public Woman(String firstName, String lastName, String surname, int age, String nation) {
 		super(firstName, lastName, surname, age, nation);
 	}
 

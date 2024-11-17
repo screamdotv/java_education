@@ -1,6 +1,6 @@
-package practise;
+package model;
 
-public class Person {
+public abstract class Person {
 	protected String firstName;
 	protected String lastName;
 	protected String surname;

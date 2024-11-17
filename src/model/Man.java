@@ -1,11 +1,11 @@
-package practise;
+package model;
 
 public class Man extends Person {
 	protected String sex = "male"; 
-	Man(String firstName, String lastName, String surname, int age, String nation) {
+	
+	public Man(String firstName, String lastName, String surname, int age, String nation) {
 		super(firstName, lastName, surname, age, nation);
 	}
-	
 	
 	@Override
 	public String toString() {
