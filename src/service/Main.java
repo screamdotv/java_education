@@ -5,21 +5,33 @@ import model.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        PersonService personsInfo = new PersonService();
 
-		HashMap<Integer, Person> personMap = new HashMap<>();
-		
-        Person helga = new Woman("Helga", "Json", "Jou", 13, "Greek");
-        Man jhon = new Man("Jhon", "Jacob", "Monarh", 13, "Greek");
-       
-        int id = 1;
-        
-        personMap.put(id++, helga);
-        personMap.put(id++, jhon);
-        
-        for (Map.Entry<Integer, Person> person : personMap.entrySet()) {
-            System.out.println("Key: " + person.getKey() + ", Value: " + person.getValue());
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Enter you First name: ");
+        String firstName = in.nextLine();
+        System.out.println("Enter you Last name: ");
+        String lastName = in.nextLine();
+        System.out.println("Enter you Surname: ");
+        String surname = in.nextLine();
+        System.out.println("Enter you age: ");
+        int age = in.nextInt();
+        in.nextLine();
+        System.out.println("Enter you nation: ");
+        String nation = in.nextLine();
+        System.out.println("Enter you gender (male/female): ");
+        String sex = in.nextLine();
+
+        if ("male".equalsIgnoreCase(sex)) {
+            personsInfo.save(new Man(firstName, lastName, surname, age, nation));
+        } else if ("female".equalsIgnoreCase(sex)) {
+            personsInfo.save(new Woman(firstName, lastName, surname, age, nation));
+        } else {
+            System.out.println("Invalid gender entered!");
         }
-        
-	}
+
+        personsInfo.getAll();
+    }
 }

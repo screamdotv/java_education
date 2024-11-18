@@ -9,7 +9,6 @@ public class Man extends Person {
 	
 	@Override
 	public String toString() {
-		return "Persone {" + "firstName = " + firstName + "; " + "nation = " + nation + "; " + "sex = " + sex + ";"
-				+ "}";
+		return "firstName: " + firstName + "; " + "nation: " + nation + "; " + "sex: " + sex + ";";
 	}
 }

@@ -9,3 +9,6 @@ bin/
 # Git-specific
 .git/
 
+/nbproject/private/
+/build/
+/dist/
