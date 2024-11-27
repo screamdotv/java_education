@@ -1,4 +1,4 @@
-package model;
+package java_education.model;
 
 public class Woman extends Person {
 	protected String sex = "female";
@@ -9,6 +9,7 @@ public class Woman extends Person {
 
 	@Override
 	public String toString() {
-		return "firstName = " + firstName + "; " + "nation = " + nation + "; " + "sex = " + sex + ";";
+		String result = super.toString();
+		return result + "sex: " + sex + ";";
 	}
 }

@@ -1,7 +1,7 @@
-package service;
+package java_education.service;
 
 import java.util.*;
-import model.*;
+import java_education.model.*;
 
 public class PersonService {
 

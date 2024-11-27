@@ -1,4 +1,4 @@
-package model;
+package java_education.model;
 
 public abstract class Person {
 	protected String firstName;
@@ -14,8 +14,9 @@ public abstract class Person {
 		this.age = age;
 		this.nation = nation;
 	}
-
-	public String getName() {
-		return this.firstName;
+	
+	@Override
+	public String toString() {
+		return "firstName: " + firstName + "; " + "lastName: " + lastName + "; " + "age: " + age + "; " + "nation: " + nation + "; ";
 	}
 }
