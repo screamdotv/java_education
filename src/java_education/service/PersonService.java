@@ -16,9 +16,7 @@ public class PersonService {
         return id;
     }
 
-    public void getAll() {
-        for (Map.Entry<Integer, Person> person : personMap.entrySet()) {
-            System.out.println("id: " + person.getKey() + "; " + person.getValue());
-        }
+    public Collection<Person> getAll() {
+        return personMap.values();
     }
 }
