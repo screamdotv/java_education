@@ -1,12 +1,12 @@
 package java_education.init;
 
 import java.util.*;
-import java_education.service.PersonService;
+import java_education.service.*;
 import java_education.model.*;
 
 public class PersonInitialize {
 
-    public PersonService service = new PersonService();
+    public PersonService service = ServiceConnection.getInstance();
 
     private ArrayList<Person> personsList = new ArrayList<>(Arrays.asList(
             new Man("Voltaire", "Francois", "Arouet", 83, "French"),
@@ -23,7 +23,6 @@ public class PersonInitialize {
 
     public void init() {
         for (Person person : personsList) {
-//            System.out.println(person);
             service.save(person);
         }
     }
