@@ -6,19 +6,19 @@ import java_education.model.*;
 
 public class PersonInitialize {
 
-    public PersonService service = ServiceConnection.getInstance();
+    public PersonService service = PersonServiceConnection.getPersonService();
 
     private ArrayList<Person> personsList = new ArrayList<>(Arrays.asList(
-            new Man("Voltaire", "Francois", "Arouet", 83, "French"),
-            new Man("Jean-Jacques", "Rousseau", "de la Tour", 66, "Swiss/French"),
-            new Man("Alexander", "Pope", "N/A", 56, "English"),
-            new Man("Samuel", "Johnson", "N/A", 75, "English"),
-            new Man("Jonathan", "Swift", "N/A", 78, "Irish"),
+            new Man("Voltaire", "Francois", "Arouet", 35, "French"),
+            new Man("Jean-Jacques", "Rousseau", "de la Tour", 45, "Swiss/French"),
+            new Man("Alexander", "Pope", "N/A", 44, "English"),
+            new Man("Samuel", "Johnson", "N/A", 18, "English"),
+            new Man("Jonathan", "Swift", "N/A", 20, "Irish"),
             new Woman("Mary", "Wollstonecraft", "N/A", 53, "English"),
-            new Woman("Fanny", "Burney", "N/A", 87, "English"),
-            new Woman("Lady", "Montagu", "N/A", 73, "English"),
-            new Woman("Hannah", "More", "N/A", 88, "English"),
-            new Woman("Aphra", "Behn", "N/A", 49, "English")
+            new Woman("Fanny", "Burney", "N/A", 50, "English"),
+            new Woman("Lady", "Montagu", "N/A", 35, "English"),
+            new Woman("Hannah", "More", "N/A", 22, "English"),
+            new Woman("Aphra", "Behn", "N/A", 43, "English")
     ));
 
     public void init() {
@@ -27,3 +27,5 @@ public class PersonInitialize {
         }
     }
 }
+
+
