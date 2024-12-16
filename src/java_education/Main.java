@@ -90,10 +90,6 @@ public class Main {
         main.initData();
         main.initListQuestion();
         main.startRegistration();
-
-//        PersonService service = PersonServiceConnection.getPersonService();
-//        Collection<Person> persons = service.getAll();
-//        persons.stream().filter(person->"male".equals(person.getGander())).forEach(person->System.out.println(person.getFirstName()));
     }
 
 }
