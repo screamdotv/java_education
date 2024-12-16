@@ -7,52 +7,51 @@ import java_education.model.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private Map<String, String> questionsList = new LinkedHashMap<>();
+    private Scanner scannerInput = new Scanner(System.in);
+
+    private void initData() {
+        new PersonInitialize().init();
+    }
+
+    private void doStudyTasks() {
         PersonService service = PersonServiceConnection.getPersonService();
-        initData();
+        Collection<Person> persons = service.getAll();
+        persons.forEach(System.out::println);
+    }
 
-        Scanner scannerInput = new Scanner(System.in);
+    private void initListQuestion() {
+        this.questionsList.put("gender", "Enter your gender (male/female): ");
+        this.questionsList.put("firstName", "Enter your First Name: ");
+        this.questionsList.put("lastName", "Enter your Last Name: ");
+        this.questionsList.put("surname", "Enter your Surname: ");
+        this.questionsList.put("nation", "Enter your nation: ");
+        this.questionsList.put("age", "Enter your age: ");
+    }
 
-        Map<String, String> questionsList = new LinkedHashMap<>();
-        questionsList.put("gender", "Enter your gender (male/female): ");
-        questionsList.put("firstName", "Enter your First Name: ");
-        questionsList.put("lastName", "Enter your Last Name: ");
-        questionsList.put("surname", "Enter your Surname: ");
-        questionsList.put("nation", "Enter your nation: ");
-        questionsList.put("age", "Enter your age: ");
-
-        boolean start = true;
-
-        String gender;
-        String firstName = "";
-        String lastName = "";
-        String surname = "";
-        String nation = "";
-        int age = 0;
-
+    public void startRegistration() {
         Person person = null;
-
-        System.out.print(questionsList.get("gender"));
-        String inputValue = scannerInput.nextLine();
-
-        if ("male".equalsIgnoreCase(inputValue)) {
-            person = new Man();
-        } else if ("female".equalsIgnoreCase(inputValue)) {
-            person = new Woman();
-        } else if ("exit".equalsIgnoreCase(inputValue)) {
-            start = false;
-        }
+        boolean start = true;
+        MatchService match = new MatchService();
 
         while (start) {
             for (Map.Entry<String, String> question : questionsList.entrySet()) {
                 System.out.print(question.getValue());
-                inputValue = scannerInput.nextLine();
+                String inputValue = scannerInput.nextLine();
 
                 if ("exit".equalsIgnoreCase(inputValue)) {
                     start = false;
                     break;
                 }
-            
+
+                if ("gender".equals(question.getKey())) {
+                    if ("male".equalsIgnoreCase(inputValue)) {
+                        person = new Man();
+                    } else if ("female".equalsIgnoreCase(inputValue)) {
+                        person = new Woman();
+                    }
+                }
+
                 switch (question.getKey()) {
                     case "firstName" ->
                         person.setFirstName(inputValue);
@@ -78,18 +77,23 @@ public class Main {
                     }
                 }
             }
+
             scannerInput.close();
         }
+        Collection<Person> matchListPesron = match.matchPerson(person);
+        matchListPesron.forEach(System.out::println);
     }
 
-    private static void initData() {
-        new PersonInitialize().init();
-    }
+    public static void main(String[] args) {
+        Main main = new Main();
 
-    private static void doStudyTasks() {
-        PersonService service = PersonServiceConnection.getPersonService();
-        Collection<Person> persons = service.getAll();
-        persons.forEach(System.out::println);
+        main.initData();
+        main.initListQuestion();
+        main.startRegistration();
+
+//        PersonService service = PersonServiceConnection.getPersonService();
+//        Collection<Person> persons = service.getAll();
+//        persons.stream().filter(person->"male".equals(person.getGander())).forEach(person->System.out.println(person.getFirstName()));
     }
 
 }

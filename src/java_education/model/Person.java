@@ -39,6 +39,28 @@ public abstract class Person {
         this.nation = nation;
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+    
+    public String getNation(){
+        return this.nation;
+    }
+    
+    public abstract String getGander();
+
     @Override
     public String toString() {
         return "firstName: " + firstName + "; " + "lastName: " + lastName + "; " + "age: " + age + "; " + "nation: " + nation + "; ";

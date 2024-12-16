@@ -10,6 +10,11 @@ public class Man extends Person {
 
     public Man() {
     }
+    
+    @Override
+    public String getGander(){
+        return this.sex;
+    }
 
     @Override
     public String toString() {

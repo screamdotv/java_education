@@ -12,6 +12,11 @@ public class Woman extends Person {
     }
 
     @Override
+    public String getGander() {
+        return this.sex;
+    }
+
+    @Override
     public String toString() {
         String result = super.toString();
         return result + "sex: " + sex + ";";

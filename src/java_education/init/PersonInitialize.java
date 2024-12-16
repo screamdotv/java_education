@@ -6,9 +6,9 @@ import java_education.model.*;
 
 public class PersonInitialize {
 
-    public PersonService service = PersonServiceConnection.getPersonService();
+    private PersonService service = PersonServiceConnection.getPersonService();
 
-    private ArrayList<Person> personsList = new ArrayList<>(Arrays.asList(
+    private Collection<Person> personsList = new ArrayList<>(Arrays.asList(
             new Man("Voltaire", "Francois", "Arouet", 35, "French"),
             new Man("Jean-Jacques", "Rousseau", "de la Tour", 45, "Swiss/French"),
             new Man("Alexander", "Pope", "N/A", 44, "English"),
