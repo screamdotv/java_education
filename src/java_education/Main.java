@@ -9,13 +9,13 @@ public class Main {
 
     private Map<String, String> questionsList = new LinkedHashMap<>();
     private Scanner scannerInput = new Scanner(System.in);
+    private PersonService service = PersonServiceConnection.getPersonService();
 
     private void initData() {
         new PersonInitialize().init();
     }
 
     private void doStudyTasks() {
-        PersonService service = PersonServiceConnection.getPersonService();
         Collection<Person> persons = service.getAll();
         persons.forEach(System.out::println);
     }
@@ -33,6 +33,7 @@ public class Main {
         Person person = null;
         boolean start = true;
         MatchService match = new MatchService();
+        boolean correctGander = false;
 
         while (start) {
             for (Map.Entry<String, String> question : questionsList.entrySet()) {
@@ -45,43 +46,64 @@ public class Main {
                 }
 
                 if ("gender".equals(question.getKey())) {
-                    if ("male".equalsIgnoreCase(inputValue)) {
-                        person = new Man();
-                    } else if ("female".equalsIgnoreCase(inputValue)) {
-                        person = new Woman();
-                    }
+                    person = createGenderPerson(inputValue);
                 }
 
-                switch (question.getKey()) {
-                    case "firstName" ->
-                        person.setFirstName(inputValue);
-                    case "lastName" ->
-                        person.setLastName(inputValue);
-                    case "surname" ->
-                        person.setSurname(inputValue);
-                    case "nation" ->
-                        person.setNation(inputValue);
-                    case "age" -> {
-                        boolean correctNum = false;
-                        while (!correctNum) {
-                            try {
-                                person.setAge(Integer.parseInt(inputValue));
-                                correctNum = true;
-                                start = false;
-                            } catch (NumberFormatException e) {
-                                System.out.println("Invalid age. Please enter a number.");
-                                System.out.print(question.getValue());
-                                inputValue = scannerInput.nextLine();
-                            }
-                        }
-                    }
+                if (person != null) {
+                    handleQuestionInput(person, question.getKey(), inputValue);
+                    start = false;
+                } else {
+                    System.out.println("Gender must be set before entering other details.");
+                    break;
                 }
             }
-
-            scannerInput.close();
         }
+
+        scannerInput.close();
+
+        service.save(person);
         Collection<Person> matchListPesron = match.matchPerson(person);
         matchListPesron.forEach(System.out::println);
+    }
+
+    private Person createGenderPerson(String gander) {
+        if ("male".equalsIgnoreCase(gander)) {
+            return new Man();
+        } else if ("female".equalsIgnoreCase(gander)) {
+            return new Woman();
+        }
+        return null;
+    }
+
+    private void handleQuestionInput(Person person, String key, String inputValue) {
+        switch (key) {
+            case "firstName" ->
+                person.setFirstName(inputValue);
+            case "lastName" ->
+                person.setLastName(inputValue);
+            case "surname" ->
+                person.setSurname(inputValue);
+            case "nation" ->
+                person.setNation(inputValue);
+            case "age" ->
+                handleAgeInput(person, inputValue, key);
+
+        }
+    }
+
+    private void handleAgeInput(Person person, String inputValue, String questionKey) {
+        boolean correctNum = false;
+
+        while (!correctNum) {
+            try {
+                person.setAge(Integer.parseInt(inputValue));
+                correctNum = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid age. Please enter a number.");
+                System.out.print(questionsList.get(questionKey));
+                inputValue = scannerInput.nextLine();
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -90,6 +112,10 @@ public class Main {
         main.initData();
         main.initListQuestion();
         main.startRegistration();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        main.doStudyTasks();
     }
 
 }
